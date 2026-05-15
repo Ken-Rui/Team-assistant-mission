@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<!-- saved from url=(0141)file:///D:/%E9%81%93%E5%A0%B4/2026/%E6%9C%8D%E5%8B%99%E7%B5%84/%E9%9A%8A%E8%BC%94%E4%BD%BF%E5%91%BD_%E5%BB%A3%E7%B5%90%E5%96%84%E7%B7%A3.html -->
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>隊輔使命＿廣結善緣</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans TC', '微軟正黑體', sans-serif; background: #1a1a2e; color: #eee; overflow: hidden; }
+
+  .slide { display: none; width: 100vw; height: 100vh; position: relative; flex-direction: column; justify-content: center; align-items: center; padding: 60px; }
+  .slide.active { display: flex; }
+
+  /* Navigation */
+  .nav { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100; }
+  .nav button { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 28px; border-radius: 30px; cursor: pointer; font-size: 17px; transition: all 0.3s; }
+  .nav button:hover { background: rgba(255,255,255,0.3); }
+  .slide-counter { position: fixed; top: 20px; right: 30px; font-size: 16px; color: rgba(255,255,255,0.5); z-index: 100; }
+
+  /* Progress bar */
+  .progress { position: fixed; top: 0; left: 0; height: 4px; background: linear-gradient(90deg, #f6d365, #fda085); transition: width 0.4s ease; z-index: 100; }
+
+  /* ── SLIDE 1: Cover ── */
+  .s1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); text-align: center; }
+  .s1 .tag { background: rgba(246,211,101,0.2); border: 1px solid #f6d365; color: #f6d365; padding: 6px 20px; border-radius: 20px; font-size: 18px; margin-bottom: 24px; display: inline-block; }
+  .s1 h1 { font-size: 68px; font-weight: 900; background: linear-gradient(135deg, #f6d365, #fda085); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; margin-bottom: 16px; }
+  .s1 .subtitle { font-size: 26px; color: rgba(255,255,255,0.7); margin-bottom: 40px; }
+  .s1 .meta { display: flex; gap: 32px; justify-content: center; }
+  .s1 .meta span { color: rgba(255,255,255,0.5); font-size: 18px; }
+  .s1 .meta span b { color: #f6d365; }
+  .deco-circle { position: absolute; border-radius: 50%; opacity: 0.08; }
+  .deco-circle.c1 { width: 400px; height: 400px; background: #f6d365; top: -100px; right: -100px; }
+  .deco-circle.c2 { width: 300px; height: 300px; background: #fda085; bottom: -80px; left: -80px; }
+
+  /* ── SLIDE 2: Agenda ── */
+  .s2 { background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); }
+  .s2 h2 { font-size: 36px; color: #f6d365; margin-bottom: 40px; text-align: center; }
+  .agenda-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 900px; }
+  .agenda-card { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 24px; display: flex; align-items: flex-start; gap: 16px; }
+  .agenda-num { font-size: 32px; font-weight: 900; color: #f6d365; min-width: 40px; }
+  .agenda-card h3 { font-size: 22px; color: white; margin-bottom: 6px; }
+  .agenda-card p { font-size: 15px; color: rgba(255,255,255,0.55); }
+  .agenda-card .time { background: rgba(246,211,101,0.15); color: #f6d365; font-size: 14px; padding: 3px 10px; border-radius: 10px; display: inline-block; margin-top: 8px; }
+
+  /* ── SLIDE 3: 破冰 ── */
+  .s3 { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b69 100%); text-align: center; }
+  .s3 .icon { font-size: 80px; margin-bottom: 24px; }
+  .s3 h2 { font-size: 52px; font-weight: 900; color: white; margin-bottom: 16px; }
+  .s3 .question { background: linear-gradient(135deg, rgba(246,211,101,0.15), rgba(253,160,133,0.15)); border: 1px solid rgba(246,211,101,0.4); border-radius: 20px; padding: 28px 48px; font-size: 28px; color: #f6d365; margin: 20px auto; max-width: 700px; line-height: 1.6; }
+  .s3 .hint { font-size: 19px; color: rgba(255,255,255,0.5); margin-top: 16px; }
+
+  /* ── SLIDE 4: 想獲得什麼 ── */
+  .s4 { background: linear-gradient(135deg, #0f3460 0%, #533483 100%); }
+  .section-label { font-size: 16px; color: #fda085; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+  .s4 h2 { font-size: 50px; font-weight: 900; color: white; margin-bottom: 32px; }
+  .choice-row { display: flex; gap: 20px; width: 100%; max-width: 900px; }
+  .choice-card { flex: 1; background: rgba(255,255,255,0.07); border-radius: 16px; padding: 28px; text-align: center; border: 2px solid transparent; }
+  .choice-card.a { border-color: rgba(246,211,101,0.5); }
+  .choice-card.b { border-color: rgba(253,160,133,0.5); }
+  .choice-card .vs { position: absolute; font-size: 20px; font-weight: 900; color: rgba(255,255,255,0.4); }
+  .choice-card .emoji { font-size: 40px; margin-bottom: 12px; }
+  .choice-card h3 { font-size: 20px; color: white; margin-bottom: 8px; }
+  .choice-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .role-compare { display: grid; grid-template-columns: 1fr auto 1fr; gap: 16px; width: 100%; max-width: 900px; align-items: center; margin-top: 20px; }
+  .role-box { background: rgba(255,255,255,0.07); border-radius: 14px; padding: 20px; }
+  .role-box h3 { font-size: 22px; margin-bottom: 10px; }
+  .role-box.squad h3 { color: #f6d365; }
+  .role-box.area h3 { color: #fda085; }
+  .role-box ul { list-style: none; }
+  .role-box ul li { font-size: 16px; color: rgba(255,255,255,0.7); padding: 4px 0; }
+  .role-box ul li::before { content: "▸ "; color: #f6d365; }
+  .role-box.area ul li::before { color: #fda085; }
+  .vs-center { text-align: center; font-size: 28px; font-weight: 900; color: rgba(255,255,255,0.3); }
+
+  /* ── SLIDE 5: 小隊輔職責 ── */
+  .s5 { background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%); }
+  .s5 h2 { font-size: 46px; font-weight: 900; color: white; margin-bottom: 8px; }
+  .s5 .sub { font-size: 18px; color: rgba(255,255,255,0.5); margin-bottom: 32px; }
+  .duty-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; width: 100%; max-width: 960px; }
+  .duty-card { background: rgba(255,255,255,0.07); border-radius: 14px; padding: 20px; border-left: 4px solid; }
+  .duty-card:nth-child(1) { border-color: #f6d365; }
+  .duty-card:nth-child(2) { border-color: #fda085; }
+  .duty-card:nth-child(3) { border-color: #a8edea; }
+  .duty-card:nth-child(4) { border-color: #fed6e3; }
+  .duty-card:nth-child(5) { border-color: #c3cfe2; }
+  .duty-card:nth-child(6) { border-color: #d299c2; }
+  .duty-card .icon { font-size: 28px; margin-bottom: 8px; }
+  .duty-card h3 { font-size: 19px; color: white; margin-bottom: 6px; }
+  .duty-card p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .quote-bar { background: rgba(246,211,101,0.1); border: 1px solid rgba(246,211,101,0.3); border-radius: 12px; padding: 14px 24px; font-size: 18px; color: #f6d365; text-align: center; margin-top: 16px; max-width: 960px; width: 100%; }
+
+  /* ── SLIDE 6: AI世代 ── */
+  .s6 { background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 50%, #0f3460 100%); }
+  .s6 h2 { font-size: 46px; font-weight: 900; color: white; margin-bottom: 28px; }
+  .compare-table { width: 100%; max-width: 880px; border-collapse: separate; border-spacing: 0 8px; }
+  .compare-table th { padding: 12px 20px; font-size: 17px; letter-spacing: 2px; }
+  .compare-table th:nth-child(1) { color: rgba(255,255,255,0.5); text-align: left; }
+  .compare-table th:nth-child(2) { background: rgba(100,100,200,0.2); border-radius: 8px 8px 0 0; color: #a0a8ff; }
+  .compare-table th:nth-child(3) { background: rgba(246,211,101,0.15); border-radius: 8px 8px 0 0; color: #f6d365; }
+  .compare-table td { padding: 14px 20px; font-size: 16px; }
+  .compare-table td:nth-child(1) { color: rgba(255,255,255,0.6); font-weight: 600; }
+  .compare-table td:nth-child(2) { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.5); border-radius: 4px; }
+  .compare-table td:nth-child(3) { background: rgba(246,211,101,0.07); color: rgba(255,255,255,0.85); border-radius: 4px; font-weight: 600; }
+  .highlight-quote { background: linear-gradient(135deg, rgba(253,160,133,0.15), rgba(246,211,101,0.1)); border-radius: 16px; padding: 20px 32px; text-align: center; font-size: 21px; color: white; margin-top: 20px; max-width: 880px; width: 100%; line-height: 1.7; }
+  .highlight-quote span { color: #f6d365; font-weight: 900; }
+
+  /* ── SLIDE 7: 3要素 intro ── */
+  .s7 { background: linear-gradient(135deg, #0f3460 0%, #16213e 100%); text-align: center; }
+  .s7 h2 { font-size: 46px; font-weight: 900; color: white; margin-bottom: 40px; }
+  .element-row { display: flex; gap: 24px; justify-content: center; max-width: 960px; width: 100%; }
+  .element-card { flex: 1; border-radius: 20px; padding: 36px 24px; text-align: center; position: relative; overflow: hidden; }
+  .element-card.e1 { background: linear-gradient(135deg, rgba(246,211,101,0.2), rgba(246,211,101,0.05)); border: 1px solid rgba(246,211,101,0.4); }
+  .element-card.e2 { background: linear-gradient(135deg, rgba(100,149,237,0.2), rgba(100,149,237,0.05)); border: 1px solid rgba(100,149,237,0.4); }
+  .element-card.e3 { background: linear-gradient(135deg, rgba(80,200,120,0.2), rgba(80,200,120,0.05)); border: 1px solid rgba(80,200,120,0.4); }
+  .element-card .big-char { font-size: 76px; font-weight: 900; margin-bottom: 8px; }
+  .element-card.e1 .big-char { color: #f6d365; }
+  .element-card.e2 .big-char { color: #6495ed; }
+  .element-card.e3 .big-char { color: #50c878; }
+  .element-card h3 { font-size: 26px; color: white; margin-bottom: 8px; }
+  .element-card .duty-tag { font-size: 14px; background: rgba(255,255,255,0.1); border-radius: 20px; padding: 4px 12px; color: rgba(255,255,255,0.7); margin-bottom: 12px; display: inline-block; }
+  .element-card p { font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+
+  /* ── SLIDE 8: 要素1 心 ── */
+  .s8 { background: linear-gradient(135deg, #2d1b00 0%, #1a1a2e 100%); }
+  .element-detail h2 { font-size: 52px; font-weight: 900; margin-bottom: 6px; }
+  .element-detail .subtitle { font-size: 19px; margin-bottom: 28px; color: rgba(255,255,255,0.6); }
+  .element-detail.e1 h2 { color: #f6d365; }
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 900px; }
+  .detail-item { background: rgba(255,255,255,0.07); border-radius: 14px; padding: 20px; }
+  .detail-item h4 { font-size: 18px; color: #f6d365; margin-bottom: 8px; }
+  .detail-item p { font-size: 15px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+  .action-box { background: rgba(246,211,101,0.1); border: 1px solid rgba(246,211,101,0.4); border-radius: 12px; padding: 14px 24px; font-size: 17px; color: #f6d365; margin-top: 16px; max-width: 900px; width: 100%; }
+  .action-box b { color: white; }
+
+  /* ── SLIDE 9: 要素2 道 ── */
+  .s9 { background: linear-gradient(135deg, #001a40 0%, #1a1a2e 100%); }
+  .element-detail.e2 h2 { color: #6495ed; }
+  .s9 .detail-item h4 { color: #6495ed; }
+  .s9 .action-box { background: rgba(100,149,237,0.1); border-color: rgba(100,149,237,0.4); color: #6495ed; }
+
+  /* ── SLIDE 10: 要素3 能 ── */
+  .s10 { background: linear-gradient(135deg, #001a10 0%, #1a1a2e 100%); }
+  .element-detail.e3 h2 { color: #50c878; }
+  .s10 .detail-item h4 { color: #50c878; }
+  .s10 .action-box { background: rgba(80,200,120,0.1); border-color: rgba(80,200,120,0.4); color: #50c878; }
+  .skill-list { list-style: none; }
+  .skill-list li { font-size: 15px; color: rgba(255,255,255,0.75); padding: 5px 0; line-height: 1.6; }
+  .skill-list li::before { content: "✓ "; color: #50c878; font-weight: 900; }
+
+  /* ── SLIDE 11: 善緣地圖 ── */
+  .s11 { background: linear-gradient(135deg, #1a0f3c 0%, #0f3460 100%); }
+  .s11 h2 { font-size: 46px; font-weight: 900; color: white; margin-bottom: 8px; }
+  .s11 .sub { font-size: 19px; color: rgba(255,255,255,0.5); margin-bottom: 28px; }
+  .reflect-cards { display: flex; gap: 20px; width: 100%; max-width: 880px; margin-bottom: 24px; }
+  .reflect-card { flex: 1; background: rgba(255,255,255,0.07); border-radius: 16px; padding: 24px; text-align: center; }
+  .reflect-card .q-num { font-size: 36px; font-weight: 900; color: rgba(246,211,101,0.4); margin-bottom: 8px; }
+  .reflect-card p { font-size: 19px; color: white; line-height: 1.7; }
+  .final-quote { background: linear-gradient(135deg, rgba(246,211,101,0.15), rgba(253,160,133,0.1)); border: 1px solid rgba(246,211,101,0.35); border-radius: 20px; padding: 24px 40px; font-size: 21px; color: white; text-align: center; max-width: 880px; width: 100%; line-height: 1.8; }
+  .final-quote span { color: #f6d365; font-weight: 900; }
+
+  /* ── SLIDE 12: 結尾 ── */
+  .s12 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); text-align: center; }
+  .s12 .icon { font-size: 72px; margin-bottom: 20px; }
+  .s12 h2 { font-size: 54px; font-weight: 900; color: white; margin-bottom: 16px; }
+  .s12 .big-quote { font-size: 26px; color: #f6d365; margin-bottom: 32px; line-height: 1.7; max-width: 700px; }
+  .seed-box { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 20px 36px; font-size: 19px; color: rgba(255,255,255,0.7); }
+  .seed-box b { color: white; display: block; font-size: 22px; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" style="width: 83.3333%;"></div>
+<div class="slide-counter" id="counter">10 / 12</div>
+
+<!-- SLIDE 1: 封面 -->
+<div class="slide s1">
+  <div class="deco-circle c1"></div>
+  <div class="deco-circle c2"></div>
+  <div class="tag">立德班 小隊輔暨區隊長 培訓</div>
+  <h1>隊輔使命<br>廣結善緣</h1>
+  <div class="subtitle">讓你走過的每段路，都留下光</div>
+  <div class="meta">
+    <span>⏱ <b>25 分鐘</b></span>
+    <span>🎯 <b>小隊輔 ＆ 區隊長</b></span>
+    <span>📍 <b>台中道場</b></span>
+  </div>
+</div>
+
+<!-- SLIDE 2: 課程大綱 -->
+<div class="slide s2">
+  <h2>📋 今天的課程</h2>
+  <div class="agenda-grid">
+    <div class="agenda-card">
+      <div class="agenda-num">01</div>
+      <div>
+        <h3>開場破冰</h3>
+        <p>一個問題，讓你思考自己留下了什麼</p>
+        <span class="time">2 分鐘</span>
+      </div>
+    </div>
+    <div class="agenda-card">
+      <div class="agenda-num">02</div>
+      <div>
+        <h3>你想獲得什麼？＋角色職責</h3>
+        <p>動機釐清 × 小隊輔與區隊長的位置</p>
+        <span class="time">6 分鐘</span>
+      </div>
+    </div>
+    <div class="agenda-card">
+      <div class="agenda-num">03</div>
+      <div>
+        <h3>崇德修道郎 vs AI 世代</h3>
+        <p>人的溫度，在 AI 時代的不可取代</p>
+        <span class="time">7 分鐘</span>
+      </div>
+    </div>
+    <div class="agenda-card">
+      <div class="agenda-num">04</div>
+      <div>
+        <h3>菁英隊輔必備 3 要素</h3>
+        <p>心 × 道 × 能，職責背後的根</p>
+        <span class="time">8 分鐘</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: 開場破冰 -->
+<div class="slide s3">
+  <div class="icon">💭</div>
+  <div class="section-label" style="color:#fda085;">開場破冰 · 默想 30 秒</div>
+  <h2>如果有人記得你</h2>
+  <div class="question">
+    「如果今天有個學弟妹記得你，<br>他記得的是什麼？」
+  </div>
+  <div class="hint">請先默想，不用回答……帶著這個問題，進入今天的課程</div>
+</div>
+
+<!-- SLIDE 4: 角色認識 -->
+<div class="slide s4">
+  <div class="section-label">01 · 想獲得什麼？</div>
+  <h2>先認識你的位置</h2>
+  <div class="role-compare">
+    <div class="role-box squad">
+      <h3>💛 小隊輔</h3>
+      <ul>
+        <li>直接陪伴學弟妹</li>
+        <li>帶動小隊氣氛</li>
+        <li>察覺情緒、接住人</li>
+        <li>面對的是：班員</li>
+      </ul>
+    </div>
+    <div class="vs-center">VS</div>
+    <div class="role-box area">
+      <h3>🧡 區隊長</h3>
+      <ul>
+        <li>協調整區、承上啟下</li>
+        <li>支援小隊輔</li>
+        <li>穩住全區道義氣氛</li>
+        <li>面對的是：小隊輔＋班指揮</li>
+      </ul>
+    </div>
+  </div>
+  <div class="quote-bar" style="margin-top:20px;">
+    「兩個角色都在練廣結善緣，只是層次不同——都從動機開始。」
+  </div>
+</div>
+
+<!-- SLIDE 5: 小隊輔六大職責 -->
+<div class="slide s5">
+  <div class="section-label">01 · 角色職責</div>
+  <h2>小隊輔的六大職責</h2>
+  <div class="sub">這不是任務清單，是廣結善緣的實踐地圖</div>
+  <div class="duty-grid">
+    <div class="duty-card">
+      <div class="icon">📋</div>
+      <h3>點名與掌握人數</h3>
+      <p>每次集合第一任務，確認區內所有班員到位，是對整區負責的第一步。</p>
+    </div>
+    <div class="duty-card">
+      <div class="icon">🎉</div>
+      <h3>帶動小隊氣氛</h3>
+      <p>隊呼、鼓勵、小互動，讓整個小隊「活起來」——你的能量決定整區的溫度。</p>
+    </div>
+    <div class="duty-card">
+      <div class="icon">❤️</div>
+      <h3>關心與陪伴</h3>
+      <p>注意班員的情緒狀態，有人悶悶不樂，你要第一個察覺、第一個靠近。</p>
+    </div>
+    <div class="duty-card">
+      <div class="icon">📢</div>
+      <h3>傳達指令</h3>
+      <p>把班指揮的安排，用學弟妹聽得懂的語言說清楚——你是橋樑，不只是傳聲筒。</p>
+    </div>
+    <div class="duty-card">
+      <div class="icon">🎯</div>
+      <h3>維持紀律</h3>
+      <p>不是靠「兇」，而是靠「身教」——你先做到，學弟妹就跟進。</p>
+    </div>
+    <div class="duty-card">
+      <div class="icon">🔔</div>
+      <h3>回報狀況</h3>
+      <p>區內有突發狀況，要第一時間往上回報，你是整區的第一道關卡。</p>
+    </div>
+  </div>
+  <div class="quote-bar">「小隊輔不是『管人的』，是『陪人的』——用真心陪伴，就是最好的帶動。」</div>
+</div>
+
+<!-- SLIDE 6: 崇德修道郎 vs AI -->
+<div class="slide s6">
+  <div class="section-label">02 · 崇德修道郎 vs AI 世代</div>
+  <h2>你能給的，AI 給不了</h2>
+  <table class="compare-table">
+    <tbody><tr>
+      <th>小隊輔職責</th>
+      <th>🤖 AI 能做的</th>
+      <th>💛 你能做的</th>
+    </tr>
+    <tr>
+      <td>帶動氣氛</td>
+      <td>提供隊呼設計、活動腳本</td>
+      <td>用你自己的方式讓大家笑</td>
+    </tr>
+    <tr>
+      <td>關心陪伴</td>
+      <td>傳送問候訊息</td>
+      <td>看著他的眼睛說「你今天還好嗎？」</td>
+    </tr>
+    <tr>
+      <td>察覺情緒</td>
+      <td>數據分析行為模式</td>
+      <td>憑感覺知道他「今天不對勁」</td>
+    </tr>
+    <tr>
+      <td>維持紀律</td>
+      <td>規則提示通知</td>
+      <td>用自己的態度讓人願意跟進</td>
+    </tr>
+    <tr>
+      <td>生命見證</td>
+      <td>給答案、給建議</td>
+      <td>說：「我走過這段路，我懂你。」</td>
+    </tr>
+  </tbody></table>
+  <div class="highlight-quote">
+    「AI 可以幫學弟妹解答問題，但它無法在他迷失的那一刻，<br>
+    剛好有個<span>真心在乎他的學長姐</span>，坐在他身旁說：我懂你。」
+  </div>
+</div>
+
+<!-- SLIDE 7: 3要素總覽 -->
+<div class="slide s7">
+  <div class="section-label">03 · 菁英小隊輔必備</div>
+  <h2>3 要素——職責背後的根</h2>
+  <div class="element-row">
+    <div class="element-card e1">
+      <div class="big-char">心</div>
+      <h3>真誠的心</h3>
+      <div class="duty-tag">對應：關心陪伴、察覺情緒</div>
+      <p>你不用每次都說很多，<br>但你必須是「真的在乎」</p>
+    </div>
+    <div class="element-card e2">
+      <div class="big-char">道</div>
+      <h3>道義的根</h3>
+      <div class="duty-tag">對應：維持紀律、以身作則</div>
+      <p>規矩不是靠強制，<br>而是靠你自己先做到</p>
+    </div>
+    <div class="element-card e3">
+      <div class="big-char">能</div>
+      <h3>帶動的能力</h3>
+      <div class="duty-tag">對應：點名、傳達、帶動、回報</div>
+      <p>讀懂場、接住人、<br>傳好話</p>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: 要素1 心 -->
+<div class="slide s8">
+  <div class="element-detail e1">
+    <div class="section-label">要素 01</div>
+    <h2>💛 真誠的心</h2>
+    <div class="subtitle">對應職責：關心陪伴 × 察覺情緒</div>
+  </div>
+  <div class="detail-grid">
+    <div class="detail-item">
+      <h4>🔍 你要在乎的事</h4>
+      <p>記住每個學弟妹的名字、他的狀態、他最近在煩什麼。不是因為你要「表現好」，而是因為你真的在乎他。</p>
+    </div>
+    <div class="detail-item">
+      <h4>⚠️ 常見的陷阱</h4>
+      <p>假笑帶班，學弟妹感受得到；流程走完就結束，學弟妹也會感受得到。「有來」和「有心」是兩件事。</p>
+    </div>
+    <div class="detail-item">
+      <h4>🌱 廣結善緣的連結</h4>
+      <p>廣結善緣的第一步，不是說好聽的話，而是——讓對方感受到你是認真在意他的。</p>
+    </div>
+    <div class="detail-item">
+      <h4>✨ 小隊輔的見證力</h4>
+      <p>你走過立德班這段路，你知道什麼感覺。這個「我懂你」，是 AI 永遠給不了的禮物。</p>
+    </div>
+  </div>
+  <div class="action-box">
+    🎯 <b>本次帶班實踐：</b>記下小隊裡每一個學弟妹的名字，下次帶班第一個叫出他的名字
+  </div>
+</div>
+
+<!-- SLIDE 9: 要素2 道 -->
+<div class="slide s9">
+  <div class="element-detail e2">
+    <div class="section-label">要素 02</div>
+    <h2>🔵 道義的根</h2>
+    <div class="subtitle">對應職責：維持紀律 × 傳達指令 × 以身作則</div>
+  </div>
+  <div class="detail-grid">
+    <div class="detail-item">
+      <h4>🏛️ 什麼是「道義的根」</h4>
+      <p>你不只是帶活動的人，你是在帶「一群正在走修道路的學弟妹」。你的言行，就是他們看到的道義形象。</p>
+    </div>
+    <div class="detail-item">
+      <h4>📍 身教重於言教</h4>
+      <p>你自己先準時、先整齊、先認真，學弟妹才會跟進。「要求別人做到，自己先做到」——這就是道義的根。</p>
+    </div>
+    <div class="detail-item">
+      <h4>🌱 廣結善緣的連結</h4>
+      <p>帶的不只是活動，而是在每個班員心裡種下一顆向善的種子。緣不只是靠說話多，而是靠長期的以身作則。</p>
+    </div>
+    <div class="detail-item">
+      <h4>💬 一句話定位</h4>
+      <p>「仙佛看的是你願不願意承擔，而不是能力多強。」<br>道義的根，從「願意」開始。</p>
+    </div>
+  </div>
+  <div class="action-box" style="background:rgba(100,149,237,0.1);border-color:rgba(100,149,237,0.4);color:#6495ed;">
+    🎯 <b>本次帶班實踐：</b>帶班前5分鐘到場，讓學弟妹看見你「已經在了」
+  </div>
+</div>
+
+<!-- SLIDE 10: 要素3 能 -->
+<div class="slide s10 active">
+  <div class="element-detail e3">
+    <div class="section-label">要素 03</div>
+    <h2>🟢 帶動的能力</h2>
+    <div class="subtitle">對應職責：點名掌握 × 帶動氣氛 × 傳達指令 × 回報狀況</div>
+  </div>
+  <div class="detail-grid">
+    <div class="detail-item">
+      <h4>👁️ 能「讀懂場」</h4>
+      <ul class="skill-list">
+        <li>什麼時候要熱鬧帶動、什麼時候要安靜陪伴</li>
+        <li>整區氣氛悶了，你怎麼點燃它</li>
+        <li>太鬧了，你怎麼讓大家沉澱下來</li>
+      </ul>
+    </div>
+    <div class="detail-item">
+      <h4>🤝 能「接住人」</h4>
+      <ul class="skill-list">
+        <li>學弟妹情緒崩潰，你是第一道關卡</li>
+        <li>有人安靜退縮，你先靠近、先問一句</li>
+        <li>不是要解決所有問題，而是讓他知道有人在</li>
+      </ul>
+    </div>
+    <div class="detail-item">
+      <h4>📣 能「傳好話」</h4>
+      <ul class="skill-list">
+        <li>大隊長說的，你轉述出去，大家要聽得懂</li>
+        <li>不是只傳達內容，而是讓學弟妹願意配合</li>
+        <li>你是橋樑——用學弟妹的語言說話</li>
+      </ul>
+    </div>
+    <div class="detail-item">
+      <h4>✨ 能「創造亮點」</h4>
+      <ul class="skill-list">
+        <li>設計一個讓學弟妹記住的小細節或儀式感</li>
+        <li>緣不是靠說話多，而是靠對的時機走進人心</li>
+        <li>你帶的那個小隊，因你而不同</li>
+      </ul>
+    </div>
+  </div>
+  <div class="action-box" style="background:rgba(80,200,120,0.1);border-color:rgba(80,200,120,0.4);color:#50c878;">
+    🎯 <b>本次帶班實踐：</b>設計一個你的小隊專屬「亮點時刻」——讓學弟妹記住這次帶班
+  </div>
+</div>
+
+<!-- SLIDE 11: 善緣實踐 -->
+<div class="slide s11">
+  <div class="section-label">04 · 立德班善緣實踐</div>
+  <h2>廣結善緣，從你的小隊開始</h2>
+  <div class="sub">兩個問題，默想 2 分鐘</div>
+  <div class="reflect-cards">
+    <div class="reflect-card">
+      <div class="q-num">Q1</div>
+      <p>在你的小隊裡，<br>哪一個學弟妹是你<br>最難帶的？</p>
+    </div>
+    <div class="reflect-card">
+      <div class="q-num">Q2</div>
+      <p>如果你能讓他在立德班<br>留下一個好印象，<br>那個印象是什麼？</p>
+    </div>
+  </div>
+  <div class="final-quote">
+    「廣結善緣不是讓所有人都喜歡你，而是——<br>
+    你走過每個人的生命時，<span>他的那段路因為你，走得更有力氣。</span><br>
+    這，就是小隊輔使命的核心。」
+  </div>
+</div>
+
+<!-- SLIDE 12: 結尾 -->
+<div class="slide s12">
+  <div class="deco-circle c1"></div>
+  <div class="deco-circle c2"></div>
+  <div class="icon">🌱</div>
+  <h2>種下你的種子</h2>
+  <div class="big-quote">
+    「職責是你的工作清單，<br>
+    3 要素是你完成這張清單的根。<br>
+    沒有根，職責只是任務；<br>
+    有了根，每件事都是在廣結善緣。」
+  </div>
+  <div class="seed-box">
+    <b>📝 帶走一個承諾</b>
+    這次帶班，我想在學弟妹心中種下一顆什麼樣的種子？
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <button onclick="changeSlide(-1)">← 上一頁</button>
+  <button onclick="changeSlide(1)">下一頁 →</button>
+</div>
+
+<script>
+  let current = 0;
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+
+  function changeSlide(dir) {
+    slides[current].classList.remove('active');
+    current = (current + dir + total) % total;
+    slides[current].classList.add('active');
+    document.getElementById('counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('progress').style.width = ((current + 1) / total * 100) + '%';
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+  });
+
+  document.getElementById('progress').style.width = (1 / total * 100) + '%';
+</script>
+
+
+</body></html>
